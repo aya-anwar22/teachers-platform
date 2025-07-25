@@ -1,15 +1,13 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import express = require('express'); // ✅ الحل هنا
 import { ExpressAdapter } from '@nestjs/platform-express';
 
-// ✅ هنا الحل الأكيد
-const express = require('express');
 const server = express();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
-
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -17,7 +15,6 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
-
   app.enableCors({
     origin: ['http://localhost:4200'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
@@ -25,9 +22,13 @@ async function bootstrap() {
   });
 
   await app.init();
+
+  if (process.env.NODE_ENV !== 'production') {
+    await app.listen(3000);
+    console.log(`🚀 Local server running at http://localhost:3000`);
+  }
 }
 
 bootstrap();
 
-// ✅ مهم: لازم تصدّر الـ server
 export default server;
