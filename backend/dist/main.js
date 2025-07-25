@@ -19,6 +19,9 @@ async function bootstrap() {
         credentials: true,
     });
     await app.init();
+    server.all('*', (req, res) => {
+        res.status(404).send('Not Found');
+    });
 }
 bootstrap();
 exports.default = server;

@@ -8,6 +8,7 @@ const server = express();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
+
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
@@ -17,14 +18,19 @@ async function bootstrap() {
   );
 
   app.enableCors({
-    origin: ['http://localhost:4200'], // Angular Dev Server
+    origin: ['http://localhost:4200'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
 
-  await app.init(); // بدل listen
+  await app.init();
+
+  // دي مهمة جدًا
+  server.all('*', (req, res) => {
+    res.status(404).send('Not Found');
+  });
 }
 
 bootstrap();
 
-export default server; // عشان Vercel يعرف يعمله handle
+export default server;
