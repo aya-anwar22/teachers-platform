@@ -1,2 +1,2 @@
-declare const server: import("express-serve-static-core").Express;
+declare const server: any;
 export default server;
