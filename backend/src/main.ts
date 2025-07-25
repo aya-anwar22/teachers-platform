@@ -1,9 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
-import * as express from 'express';
+import express from 'express'; // ✅ كده صح لو عندك esModuleInterop
 import { ExpressAdapter } from '@nestjs/platform-express';
-import { Server } from 'http';
 
 const server = express();
 
