@@ -1,12 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import * as express from 'express';
 import { ExpressAdapter } from '@nestjs/platform-express';
 
-import * as express from 'express';
-
-const server = express(); // ✅ بدون .default()
-
+const server = express();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
@@ -24,6 +22,11 @@ async function bootstrap() {
   });
 
   await app.init();
+
+  if (process.env.NODE_ENV !== 'production') {
+    await app.listen(3000);
+    console.log(`🚀 Local server running at http://localhost:3000`);
+  }
 }
 
 bootstrap();
