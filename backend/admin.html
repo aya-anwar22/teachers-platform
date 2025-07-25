@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - منصة التعليم الإلكتروني</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background-color: var(--dark-color);
+            color: white;
+            transition: all 0.3s;
+            height: 100vh;
+            position: fixed;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-header {
+            padding: 1.5rem 1rem;
+            border-bottom: 1px solid #444;
+            text-align: center;
+        }
+        
+        .sidebar-header h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-header p {
+            font-size: 0.8rem;
+            color: #bbb;
+        }
+        
+        .sidebar-menu {
+            padding: 1rem 0;
+        }
+        
+        .sidebar-menu ul {
+            list-style: none;
+        }
+        
+        .sidebar-menu li a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: #bbb;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-right: 3px solid transparent;
+        }
+        
+        .sidebar-menu li a:hover,
+        .sidebar-menu li a.active {
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            border-right: 3px solid var(--primary-color);
+        }
+        
+        .sidebar-menu li a i {
+            margin-left: 0.5rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-right: 250px;
+            transition: all 0.3s;
+        }
+        
+        /* Navbar Styles */
+        .navbar {
+            background-color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .toggle-sidebar {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--dark-color);
+            margin-left: 1rem;
+        }
+        
+        .navbar-right {
+            display: flex;
+            align-items: center;
+        }
+        
+        .notification-icon,
+        .user-dropdown {
+            position: relative;
+            margin-left: 1rem;
+            cursor: pointer;
+        }
+        
+        .notification-icon i {
+            font-size: 1.2rem;
+            color: var(--dark-color);
+        }
+        
+        .notification-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .user-dropdown img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        /* Dashboard Content Styles */
+        .dashboard-content {
+            padding: 1.5rem;
+        }
+        
+        .page-title {
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .page-title h2 {
+            font-weight: 600;
+        }
+        
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-left: 1rem;
+        }
+        
+        .stat-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .stat-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .card-1 .stat-icon {
+            background-color: rgba(52, 152, 219, 0.2);
+            color: var(--primary-color);
+        }
+        
+        .card-2 .stat-icon {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--success-color);
+        }
+        
+        .card-3 .stat-icon {
+            background-color: rgba(243, 156, 18, 0.2);
+            color: var(--warning-color);
+        }
+        
+        .card-4 .stat-icon {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--accent-color);
+        }
+        
+        .dashboard-sections {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        .section-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.8rem;
+        }
+        
+        .section-header h3 {
+            color: var(--dark-color);
+        }
+        
+        .section-header a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table th {
+            text-align: right;
+            padding: 0.8rem;
+            background-color: #f9f9f9;
+            color: #555;
+            font-weight: 600;
+        }
+        
+        table td {
+            padding: 0.8rem;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+        
+        table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .status-pending {
+            background-color: rgba(243, 156, 18, 0.2);
+            color: var(--warning-color);
+        }
+        
+        .status-approved {
+            background-color: rgba(46, 204, 113, 0.2);
+            color: var(--success-color);
+        }
+        
+        .status-rejected {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: var(--accent-color);
+        }
+        
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--primary-color);
+            margin-right: 0.5rem;
+        }
+        
+        .recent-activities {
+            list-style: none;
+        }
+        
+        .activity-item {
+            display: flex;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px dashed #eee;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(52, 152, 219, 0.2);
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .activity-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .activity-info p {
+            font-size: 0.8rem;
+            color: #777;
+        }
+        
+        .activity-time {
+            font-size: 0.7rem;
+            color: #999;
+            margin-top: 0.3rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .dashboard-sections {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                margin-right: -250px;
+            }
+            
+            .sidebar.active {
+                margin-right: 0;
+            }
+            
+            .main-content {
+                margin-right: 0;
+            }
+            
+            .stats-cards {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .stats-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .navbar-right {
+                margin-top: 1rem;
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>لوحة التحكم</h3>
+            <p>منصة التعليم الإلكتروني</p>
+        </div>
+        
+        <div class="sidebar-menu">
+            <ul>
+                <li><a href="#" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+                <li><a href="#"><i class="fas fa-calendar-check"></i> الحجوزات</a></li>
+                <li><a href="#"><i class="fas fa-users"></i> الطلاب</a></li>
+                <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> المدرسين</a></li>
+                <li><a href="#"><i class="fas fa-book"></i> الدروس</a></li>
+                <li><a href="#"><i class="fas fa-question-circle"></i> الأسئلة</a></li>
+                <li><a href="#"><i class="fas fa-comments"></i> النقاشات</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> الإعدادات</a></li>
+                <li><a href="#"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="navbar-left">
+                <button class="toggle-sidebar" id="toggleSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h3>مرحباً، أحمد محمد</h3>
+            </div>
+            
+            <div class="navbar-right">
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-count">3</span>
+                </div>
+                
+                <div class="user-dropdown">
+                    <img src="https://via.placeholder.com/150" alt="User Image">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <div class="page-title">
+                <h2>لوحة التحكم</h2>
+                <div class="breadcrumb">
+                    الرئيسية / لوحة التحكم
+                </div>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="stats-cards">
+                <div class="stat-card card-1">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>1,245</h3>
+                        <p>عدد الطلاب</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card card-2">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>356</h3>
+                        <p>حجز جديد</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card card-3">
+                    <div class="stat-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>124</h3>
+                        <p>دروس جديدة</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card card-4">
+                    <div class="stat-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>89</h3>
+                        <p>أسئلة جديدة</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dashboard Sections -->
+            <div class="dashboard-sections">
+                <!-- Main Section -->
+                <div class="main-section">
+                    <!-- Recent Bookings -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>الحجوزات الحديثة</h3>
+                            <a href="#">عرض الكل</a>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>رقم الحجز</th>
+                                        <th>الطالب</th>
+                                        <th>التاريخ</th>
+                                        <th>الحالة</th>
+                                        <th>إجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>#1254</td>
+                                        <td>محمد أحمد</td>
+                                        <td>15/06/2023</td>
+                                        <td><span class="status status-pending">قيد الانتظار</span></td>
+                                        <td>
+                                            <button class="action-btn" title="قبول"><i class="fas fa-check"></i></button>
+                                            <button class="action-btn" title="رفض"><i class="fas fa-times"></i></button>
+                                            <button class="action-btn" title="التفاصيل"><i class="fas fa-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#1253</td>
+                                        <td>سارة محمود</td>
+                                        <td>14/06/2023</td>
+                                        <td><span class="status status-approved">مقبول</span></td>
+                                        <td>
+                                            <button class="action-btn" title="التفاصيل"><i class="fas fa-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#1252</td>
+                                        <td>أحمد علي</td>
+                                        <td>14/06/2023</td>
+                                        <td><span class="status status-rejected">مرفوض</span></td>
+                                        <td>
+                                            <button class="action-btn" title="التفاصيل"><i class="fas fa-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>#1251</td>
+                                        <td>ياسمين خالد</td>
+                                        <td>13/06/2023</td>
+                                        <td><span class="status status-approved">مقبول</span></td>
+                                        <td>
+                                            <button class="action-btn" title="التفاصيل"><i class="fas fa-eye"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Lessons -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>آخر الدروس المضافة</h3>
+                            <a href="#">عرض الكل</a>
+                        </div>
+                        
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>اسم الدرس</th>
+                                        <th>المرحلة</th>
+                                        <th>المادة</th>
+                                        <th>تاريخ الإضافة</th>
+                                        <th>إجراءات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>الكسور في الرياضيات</td>
+                                        <td>الابتدائية</td>
+                                        <td>الرياضيات</td>
+                                        <td>15/06/2023</td>
+                                        <td>
+                                            <button class="action-btn" title="عرض"><i class="fas fa-eye"></i></button>
+                                            <button class="action-btn" title="تعديل"><i class="fas fa-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>قواعد النحو الأساسية</td>
+                                        <td>الإعدادية</td>
+                                        <td>اللغة العربية</td>
+                                        <td>14/06/2023</td>
+                                        <td>
+                                            <button class="action-btn" title="عرض"><i class="fas fa-eye"></i></button>
+                                            <button class="action-btn" title="تعديل"><i class="fas fa-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>أساسيات الكيمياء</td>
+                                        <td>الثانوية</td>
+                                        <td>العلوم</td>
+                                        <td>13/06/2023</td>
+                                        <td>
+                                            <button class="action-btn" title="عرض"><i class="fas fa-eye"></i></button>
+                                            <button class="action-btn" title="تعديل"><i class="fas fa-edit"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Side Section -->
+                <div class="side-section">
+                    <!-- Recent Activities -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>النشاطات الحديثة</h3>
+                            <a href="#">عرض الكل</a>
+                        </div>
+                        
+                        <ul class="recent-activities">
+                            <li class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="activity-info">
+                                    <h4>حجز جديد</h4>
+                                    <p>قام محمد أحمد بحجز درس في الرياضيات</p>
+                                    <div class="activity-time">منذ 15 دقيقة</div>
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div class="activity-info">
+                                    <h4>درس جديد</h4>
+                                    <p>تم إضافة درس جديد في اللغة الإنجليزية</p>
+                                    <div class="activity-time">منذ ساعتين</div>
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="activity-info">
+                                    <h4>طالب جديد</h4>
+                                    <p>سجلت ياسمين خالد في المنصة</p>
+                                    <div class="activity-time">منذ 5 ساعات</div>
+                                </div>
+                            </li>
+                            <li class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-question-circle"></i>
+                                </div>
+                                <div class="activity-info">
+                                    <h4>سؤال جديد</h4>
+                                    <p>طرح أحمد علي سؤالاً في قسم العلوم</p>
+                                    <div class="activity-time">منذ يوم</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h3>إجراءات سريعة</h3>
+                        </div>
+                        
+                        <div class="quick-actions">
+                            <button class="action-btn full-width">
+                                <i class="fas fa-plus"></i> إضافة درس جديد
+                            </button>
+                            <button class="action-btn full-width">
+                                <i class="fas fa-user-plus"></i> إضافة مدرس جديد
+                            </button>
+                            <button class="action-btn full-width">
+                                <i class="fas fa-calendar-plus"></i> فتح حجز جديد
+                            </button>
+                            <button class="action-btn full-width">
+                                <i class="fas fa-question-circle"></i> إجابة على سؤال
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Sidebar
+        document.getElementById('toggleSidebar').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
+        });
+        
+        // يمكنك إضافة المزيد من الوظائف هنا حسب الحاجة
+    </script>
+</body>
+</html>
