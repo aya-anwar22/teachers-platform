@@ -1,23 +1,21 @@
+import { Handler } from 'aws-lambda';
+import serverlessExpress from '@vendia/serverless-express';
 import { createServer, proxy } from 'aws-serverless-express';
-import { Callback, Context, Handler } from 'aws-lambda';
 import { NestFactory } from '@nestjs/core';
-import * as express from 'express';
-import { ExpressAdapter } from '@nestjs/platform-express';
 import { AppModule } from 'src/app.module';
 
-let cachedServer;
+let server: any;
 
-async function bootstrapServer() {
-  if (!cachedServer) {
-    const expressApp = express();
-    const app = await NestFactory.create(AppModule, new ExpressAdapter(expressApp));
-    await app.init();
-    cachedServer = createServer(expressApp);
-  }
-  return cachedServer;
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  await app.init();
+  const expressApp = app.getHttpAdapter().getInstance();
+  return createServer(expressApp);
 }
 
-export const handler: Handler = async (event: any, context: Context, callback: Callback) => {
-  cachedServer = await bootstrapServer();
-  return proxy(cachedServer, event, context, 'PROMISE').promise;
+export const handler: Handler = async (event, context) => {
+  if (!server) {
+    server = await bootstrap();
+  }
+  return proxy(server, event, context, 'PROMISE').promise;
 };
