@@ -1,0 +1,83 @@
+<section class="grade-details">
+  <!-- شريط التنبيه -->
+  <div class="alert-bar" [class.show]="showAlert" [class.success]="alertType === 'success'" [class.error]="alertType === 'error'">
+    <div class="alert-content">
+      <span>{{ alertMessage }}</span>
+      <button class="close-btn" (click)="closeAlert()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2 class="grade-title">{{ grade?.name }}</h2>
+
+    <div class="content-wrapper">
+      <!-- List of Classes -->
+      <div class="classes-list">
+        <h3>الصفوف الدراسية:</h3>
+        <ul>
+          <li *ngFor="let stage of grade?.stages">
+            {{ stage.name }}
+          </li>
+        </ul>
+      </div>
+
+      <!-- Booking Form -->
+      <div class="booking-form">
+        <h3>حجز السنه الدراسيه 2026</h3>
+        <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="studentName">اسم الطالب</label>
+            <input
+              type="text"
+              id="studentName"
+              name="studentName"
+              placeholder="ادخل اسم الطالب"
+              formControlName="studentName"
+              [class.invalid]="bookingForm.get('studentName')?.invalid && bookingForm.get('studentName')?.touched"
+            >
+            <div class="error-message" *ngIf="bookingForm.get('studentName')?.invalid && bookingForm.get('studentName')?.touched">
+              يرجى إدخال اسم الطالب
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="studentPhone">رقم الهاتف</label>
+            <input
+              type="tel"
+              id="studentPhone"
+              name="studentPhone"
+              placeholder="ادخل رقم الهاتف (مثال: 01012345678)"
+              formControlName="studentPhone"
+              [class.invalid]="bookingForm.get('studentPhone')?.invalid && bookingForm.get('studentPhone')?.touched"
+            >
+            <div class="error-message" *ngIf="bookingForm.get('studentPhone')?.invalid && bookingForm.get('studentPhone')?.touched">
+              يرجى إدخال رقم هاتف صحيح (يبدأ بـ 010، 011، 012، أو 015)
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="classSelect">اختر الصف الدراسي</label>
+            <select
+              id="classSelect"
+              name="classSelect"
+              formControlName="stageId"
+              [class.invalid]="bookingForm.get('stageId')?.invalid && bookingForm.get('stageId')?.touched"
+            >
+              <option value="">-- اختر الصف --</option>
+              <option *ngFor="let stage of grade?.stages" [value]="stage.id">
+                {{ stage.name }}
+              </option>
+            </select>
+            <div class="error-message" *ngIf="bookingForm.get('stageId')?.invalid && bookingForm.get('stageId')?.touched">
+              يرجى اختيار صف دراسي
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn" [disabled]="bookingForm.invalid">احجز الآن</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

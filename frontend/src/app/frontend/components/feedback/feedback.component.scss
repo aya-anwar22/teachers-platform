@@ -1,0 +1,151 @@
+.feedback-section {
+  padding: 4rem 2rem;
+  background-color: #f9f9f9;
+  font-family: 'Tahoma', 'Arial', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .section-title {
+    text-align: center;
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 15px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 50%;
+      transform: translateX(50%);
+      width: 80px;
+      height: 3px;
+      background-color: #e74c3c;
+    }
+  }
+
+  .feedback-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .feedback-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .student-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      gap: 1rem;
+
+      .student-avatar {
+        font-size: 2.5rem;
+        color: #e74c3c;
+      }
+
+      .student-name {
+        h3 {
+          margin: 0;
+          color: #2c3e50;
+          font-size: 1.2rem;
+        }
+
+        .student-grade {
+          font-size: 0.8rem;
+          color: #666;
+        }
+      }
+    }
+
+    .feedback-content {
+      .feedback-text {
+        color: #555;
+        line-height: 1.8;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        position: relative;
+        padding: 0 1rem;
+
+        &::before,
+        &::after {
+          content: '"';
+          font-size: 2rem;
+          color: #e74c3c;
+          opacity: 0.3;
+          position: absolute;
+        }
+
+        &::before {
+          top: -10px;
+          right: 0;
+        }
+
+        &::after {
+          bottom: -20px;
+          left: 0;
+        }
+      }
+
+      .feedback-rating {
+        color: #f1c40f;
+        font-size: 1rem;
+        margin-top: 1rem;
+        text-align: left;
+      }
+    }
+  }
+
+  .feedback-actions {
+    text-align: center;
+    margin-top: 2rem;
+
+    .add-feedback-btn {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      &:hover {
+        background-color: darken(#e74c3c, 10%);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+      }
+
+      i {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+
+    .section-title {
+      font-size: 1.5rem;
+    }
+
+    .feedback-container {
+      grid-template-columns: 1fr;
+    }
+  }
+}

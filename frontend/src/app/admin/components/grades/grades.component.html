@@ -1,0 +1,62 @@
+<div class="grades-page">
+  <div class="page-header">
+    <h2>المراحل الدراسية</h2>
+    <div class="header-actions">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="ابحث عن مرحلة...">
+      </div>
+    </div>
+  </div>
+
+  <div class="content-card">
+    <div class="add-grade">
+      <div class="input-group">
+        <input type="text" [(ngModel)]="newGradeName" placeholder="اسم المرحلة الجديدة">
+        <button class="add-btn" (click)="addGrade()">
+          <i class="fas fa-plus"></i> إضافة مرحلة
+        </button>
+      </div>
+    </div>
+
+    <div class="grades-list">
+      <div class="list-header">
+        <span class="name-col">اسم المرحلة</span>
+        <span class="actions-col">الإجراءات</span>
+      </div>
+
+      <ul>
+        <li *ngFor="let grade of grades" [class.editing]="editGrade?._id === grade._id">
+          <div class="grade-info">
+            <span *ngIf="!editGrade || editGrade._id !== grade._id" class="grade-name">
+              <i class="fas fa-graduation-cap"></i> {{ grade.name }}
+            </span>
+
+            <input *ngIf="editGrade && editGrade._id === grade._id"
+                  type="text"
+                  [(ngModel)]="editGrade.name"
+                  class="edit-input">
+          </div>
+
+          <div class="grade-actions">
+            <button *ngIf="!editGrade || editGrade._id !== grade._id"
+                    class="edit-btn"
+                    (click)="startEdit(grade)">
+              <i class="fas fa-edit"></i> تعديل
+            </button>
+
+            <button *ngIf="editGrade && editGrade._id === grade._id"
+                    class="save-btn"
+                    (click)="updateGrade()">
+              <i class="fas fa-check"></i> حفظ
+            </button>
+
+            <button class="delete-btn" (click)="deleteGrade(grade._id!)">
+              <i class="fas fa-trash-alt"></i> حذف
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

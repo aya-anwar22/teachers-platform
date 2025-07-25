@@ -1,0 +1,223 @@
+/* متغيرات الألوان */
+$primary-color: #2c3e50;
+$secondary-color: #3498db;
+$success-color: #2ecc71;
+$error-color: #e74c3c;
+$text-color: #333;
+$light-gray: #f8f9fa;
+$white: #fff;
+
+/* شريط التنبيه */
+.alert-bar {
+  position: fixed;
+  top: -100px;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  color: $white;
+  text-align: center;
+  font-weight: 500;
+  z-index: 1000;
+  transition: top 0.5s ease;
+  
+  &.show {
+    top: 0;
+  }
+  
+  &.success {
+    background-color: $success-color;
+  }
+  
+  &.error {
+    background-color: $error-color;
+  }
+  
+  .alert-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    color: $white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 0.5rem;
+  }
+}
+
+.grade-details {
+  padding: 2rem 0;
+  font-family: 'Tajawal', sans-serif;
+  direction: rtl;
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .grade-title {
+    text-align: center;
+    color: $primary-color;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
+  }
+
+  .classes-list {
+    flex: 1;
+    min-width: 300px;
+    background: $light-gray;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    h3 {
+      color: $secondary-color;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding: 0.75rem 1rem;
+        margin-bottom: 0.5rem;
+        background: $white;
+        border-radius: 4px;
+        border-right: 4px solid $secondary-color;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: #e8f4fc;
+          transform: translateX(-5px);
+        }
+      }
+    }
+  }
+
+  .booking-form {
+    flex: 1;
+    min-width: 300px;
+    background: $light-gray;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+    h3 {
+      color: $secondary-color;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: $primary-color;
+        font-weight: 500;
+      }
+
+      input, select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+
+        &:focus {
+          outline: none;
+          border-color: $secondary-color;
+        }
+
+        &.invalid {
+          border-color: $error-color;
+        }
+      }
+
+      select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: left 0.75rem center;
+        background-size: 1rem;
+      }
+
+      .error-message {
+        color: $error-color;
+        font-size: 0.8rem;
+        margin-top: 0.3rem;
+        display: block;
+      }
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: $secondary-color;
+      color: $white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover:not(:disabled) {
+        background-color: darken($secondary-color, 10%);
+      }
+
+      &:disabled {
+        background-color: #95a5a6;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .content-wrapper {
+      flex-direction: column;
+    }
+
+    .alert-bar {
+      padding: 0.8rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .grade-title {
+      font-size: 1.5rem;
+    }
+
+    .classes-list, .booking-form {
+      h3 {
+        font-size: 1.3rem;
+      }
+    }
+
+    .alert-bar {
+      padding: 0.7rem;
+      font-size: 0.8rem;
+    }
+  }
+}

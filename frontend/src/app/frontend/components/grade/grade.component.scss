@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
+
+.grades-section {
+  font-family: 'Tajawal', sans-serif;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  direction: rtl;
+
+  .section-header {
+    margin-bottom: 2.5rem;
+    text-align: center;
+    
+    .section-title {
+      color: #2d3748;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        right: 0;
+        width: 50%;
+        height: 3px;
+        background: linear-gradient(to right, #4e73df, #224abe);
+        border-radius: 3px;
+      }
+    }
+    
+    .section-divider {
+      height: 1px;
+      background: #e2e8f0;
+      margin-top: 1.5rem;
+    }
+  }
+
+  .grades-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .grade-card {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    height: 180px;
+    border: 1px solid #e2e8f0;
+    
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+      
+      .grade-link {
+        color: var(--card-color);
+      }
+      
+      .card-wave {
+        height: 12px;
+      }
+    }
+
+    .grade-icon {
+      padding: 1.5rem 1.5rem 0;
+      font-size: 1.8rem;
+      color: var(--card-color);
+    }
+
+    .grade-content {
+      padding: 0 1.5rem 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      
+      .grade-title {
+        margin: 0.5rem 0;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #2d3748;
+      }
+      
+      .grade-link {
+        display: flex;
+        align-items: center;
+        font-size: 0.9rem;
+        color: #718096;
+        transition: color 0.2s ease;
+        
+        .link-icon {
+          margin-right: 8px;
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+    .card-wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background-color: var(--card-color);
+      transition: height 0.3s ease;
+    }
+  }
+
+  .no-grades {
+    margin-top: 3rem;
+    text-align: center;
+    
+    .empty-state {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      max-width: 500px;
+      margin: 0 auto;
+      
+      .empty-icon {
+        font-size: 3rem;
+        color: #a0aec0;
+        margin-bottom: 1rem;
+      }
+      
+      h3 {
+        color: #2d3748;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      
+      p {
+        color: #718096;
+        font-size: 1rem;
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .grades-section {
+    padding: 1rem;
+    
+    .grades-grid {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+    
+    .section-header .section-title {
+      font-size: 1.5rem;
+    }
+  }
+}

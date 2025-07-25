@@ -1,0 +1,35 @@
+<section class="grades-section">
+  <div class="section-header">
+    <h2 class="section-title">المراحل التعليمية</h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="grades-grid">
+    <a *ngFor="let grade of grades"
+       [routerLink]="['/grades', grade._id]"
+       class="grade-card">
+      <div class="grade-icon">
+        <i class="fas fa-book-open"></i>
+      </div>
+
+      <div class="grade-content">
+        <h3 class="grade-title">{{ grade.name }}</h3>
+        <span class="grade-link">
+         احجز الآن
+          <i class="fas fa-arrow-left link-icon"></i>
+        </span>
+      </div>
+      <div class="card-wave"></div>
+    </a>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="grades?.length === 0" class="no-grades">
+    <div class="empty-state">
+      <i class="fas fa-book empty-icon"></i>
+      <h3>لا توجد مراحل تعليمية متاحة</h3>
+      <p>حاليًا لا توجد مراحل تعليمية مسجلة في النظام</p>
+    </div>
+  </div>
+
+</section>
