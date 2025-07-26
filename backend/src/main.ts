@@ -25,7 +25,6 @@ async function bootstrap() {
 
   await app.init();
 
-  // دي مهمة جدًا
   server.all('*', (req, res) => {
     res.status(404).send('Not Found');
   });
@@ -33,4 +32,4 @@ async function bootstrap() {
 
 bootstrap();
 
-export default server;
+export default server; // ✅ مهم جدًا عشان Vercel تقدر تستورد الـ server
