@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Grade } from '../models/grade.model';
-
+import { environment } from '../../environments/environment'; 
 @Injectable({
   providedIn: 'root'
 })
 export class GradesService {
 
-  private apiUrl = 'https://api-noah-aya-anwar-372ab2cd.vercel.app';
+ private apiUrl = `${environment.apiUrl}/grades`
 
   constructor(private http: HttpClient) {}
 
