@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     );
 
     app.enableCors({
-      origin: ['http://localhost:4200'],
+      origin: '*',
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       credentials: true,
     });
