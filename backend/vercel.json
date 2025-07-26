@@ -1,7 +1,7 @@
 {
   "version": 2,
   "routes": [
-    { "src": "/(.*)", "dest": "/handler" }
+    { "src": "/", "dest": "/api" },
+    { "src": "/(.*)", "dest": "/api" }
   ]
 }
-
