@@ -9,7 +9,7 @@ import { Grade } from '../models/grade.model';
 export class GradesService {
 
  // private apiUrl = `${environment.apiUrl}/grades`
-  private apiUrl = `https://teachers-platform-tau.vercel.app/grades`
+ private apiUrl = `https://teachers-platform-vhu1.vercel.app/grades`
   
 
   constructor(private http: HttpClient) {}
