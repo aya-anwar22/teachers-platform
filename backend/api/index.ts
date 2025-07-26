@@ -18,7 +18,7 @@ export default async function handler(req, res) {
       }),
     );
     app.enableCors({
-      origin: ['http://localhost:4200'],
+      origin: ['http://localhost:4200', 'https://noah-xi-seven.vercel.app'],
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
       credentials: true,
     });
