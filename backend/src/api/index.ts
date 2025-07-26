@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
-import { AppModule } from '../src/app.module';
 import { ValidationPipe } from '@nestjs/common';
 import * as express from 'express';
+import { AppModule } from 'src/app.module';
 
 const server = express();
 let cachedServer;
