@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     app.enableCors({
       origin: '*',
       methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-      credentials: true,
+      credentials: false,
     });
 
     await app.init();
