@@ -2,10 +2,9 @@ import { NestFactory } from '@nestjs/core';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common';
 import * as express from 'express';
-import { AppModule } from './app.module';
+import { AppModule } from 'src/app.module';
 
 const server = express();
-
 let cachedServer;
 
 export default async function handler(req, res) {
