@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BookingService {
-  private apiUrl = 'https://api-noah-aya-anwar-372ab2cd.vercel.app';
+  private apiUrl = 'https://teachers-platform-tau.vercel.app';
 
   constructor(private http: HttpClient) { }
 
