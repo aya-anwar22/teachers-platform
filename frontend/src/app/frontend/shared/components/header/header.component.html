@@ -32,4 +32,25 @@
       <i class="fas fa-bars"></i>
     </button>
   </div>
+  
+  <!-- القائمة الجانبية -->
+  <div class="sidebar-menu" [class.active]="isMenuOpen">
+    <div class="sidebar-content">
+      <button class="close-btn" (click)="toggleMenu()">
+        <i class="fas fa-times"></i>
+      </button>
+      
+      <ul>
+        <li><a href="" (click)="toggleMenu()">الرئيسية</a></li>
+        <li><a href="grades" (click)="toggleMenu()">المراحل الدراسية</a></li>
+        <li><a href="grades" (click)="toggleMenu()">حجز الدروس</a></li>
+        <li class="contact-item">
+          <a href="tel:201119780127" class="phone-number" (click)="toggleMenu()">
+            <i class="fas fa-phone"></i>
+            <span>اتصل بنا</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </header>
