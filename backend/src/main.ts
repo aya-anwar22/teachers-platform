@@ -12,6 +12,9 @@ export default async function handler(req, res) {
   if (!cachedServer) {
     const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
 
+    // ✅ هنا بتحط prefix /api على كل ال routes
+    app.setGlobalPrefix('api');
+
     app.useGlobalPipes(
       new ValidationPipe({
         transform: true,
