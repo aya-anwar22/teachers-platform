@@ -8,8 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BookingService {
-  // private apiUrl = `${environment.apiUrl}/booking`;
-  private apiUrl = `http://localhost:3000/booking`;
+  private apiUrl = 'https://api-noah-aya-anwar-372ab2cd.vercel.app';
 
   constructor(private http: HttpClient) { }
 
