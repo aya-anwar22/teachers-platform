@@ -1,0 +1,24 @@
+<div class="booking-container">
+  <h2>الحجوزات</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>الرقم</th>
+        <th>اسم الطالب</th>
+        <th>رقم الهاتف</th>
+        <th> السنه الدراسيه</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let b of booking; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ b.studentName }}</td>
+        <td>{{ b.studentPhone }}</td>
+        <td>{{ b.stageId.name }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="booking.length === 0">لا توجد حجوزات حالياً.</p>
+</div>

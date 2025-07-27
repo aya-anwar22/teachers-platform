@@ -57,19 +57,26 @@ export const routes: Routes = [
       },
     ]
   },
-  // {
-  //   path: 'dashboard',
-  //   component: AdminLayoutComponent,
-  //   children: [
-  //     {
-  //       path: 'grades',
-  //       loadComponent: () =>
-  //         import('./admin/components/grades/grades.component').then(
-  //           m => m.GradesComponent
-  //         )
-  //     },
+  {
+    path: 'dashboard',
+    component: AdminLayoutComponent,
+    children: [
+      // {
+      //   path: 'grades',
+      //   loadComponent: () =>
+      //     import('./admin/components/grades/grades.component').then(
+      //       m => m.GradesComponent
+      //     )
+      // },
+       {
+        path: 'booking',
+        loadComponent: () =>
+          import('./admin/components/booking/booking.component').then(
+            m => m.BookingComponent
+          )
+      },
 
-  //   ]
-  // },
+    ]
+  },
 
 ];

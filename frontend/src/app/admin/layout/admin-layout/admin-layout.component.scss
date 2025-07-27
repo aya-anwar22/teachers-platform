@@ -1,17 +1,115 @@
+/* Main layout - Sidebar on the right (RTL) */
 :host {
   display: flex;
-  flex-direction: row-reverse; // ✅ دي اللي هتعكس الترتيب
+  min-height: 100vh;
+  direction: rtl; /* RTL overall */
 }
 
 app-sidebar {
-  width: 220px;
-  background: #333;
+  width: 250px;
+  background-color: #2c3e50;
   color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Shadow on the LEFT side */
   height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
 }
 
 .content {
   flex: 1;
   padding: 20px;
-  background: #f9f9f9;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  
+  /* Your booking container styles (RTL by default) */
+  .booking-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #fff;
+
+    h2 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 24px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+
+      thead {
+        background-color: #3498db;
+        color: white;
+
+        tr th {
+          padding: 12px;
+          text-align: right; /* RTL alignment */
+          font-weight: 500;
+        }
+      }
+
+      tbody {
+        tr {
+          border-bottom: 1px solid #ecf0f1;
+          transition: background-color 0.2s;
+
+          &:hover {
+            background-color: #f8f9fa;
+          }
+
+          td {
+            padding: 12px;
+            text-align: right; /* RTL alignment */
+            color: #34495e;
+          }
+
+          &:nth-child(even) {
+            background-color: #f8f9fa;
+          }
+        }
+      }
+    }
+
+    p {
+      text-align: center;
+      color: #7f8c8d;
+      font-size: 16px;
+      padding: 20px;
+    }
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  app-sidebar {
+    width: 70px;
+  }
+  
+  .content {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  :host {
+    flex-direction: column; /* Sidebar moves to top on mobile */
+  }
+  
+  app-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Shadow on top */
+  }
+  
+  .content {
+    min-height: auto;
+  }
 }
