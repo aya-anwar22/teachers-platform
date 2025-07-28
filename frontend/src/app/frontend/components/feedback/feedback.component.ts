@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-feedback',
   imports: [],
+    standalone: true,
+
   templateUrl: './feedback.component.html',
   styleUrl: './feedback.component.scss'
 })

@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
     RouterModule,CommonModule
     
   ],
+    standalone: true,
+
   templateUrl: './grade.component.html',
   styleUrls: ['./grade.component.scss']
 })

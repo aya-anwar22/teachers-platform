@@ -5,6 +5,8 @@ import { GradeComponent } from '../grade/grade.component';
 @Component({
   selector: 'app-home',
   imports: [HeroComponent, GradeComponent],
+    standalone: true,
+
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
