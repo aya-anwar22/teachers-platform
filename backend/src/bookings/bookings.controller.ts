@@ -3,6 +3,7 @@ import { BookingsService } from './bookings.service';
 import { get } from 'mongoose';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { AuthGuard } from '@nestjs/passport';
+import { BookingResponseDto } from './dto/booking-response.dto';
 
 @Controller('booking')
 export class BookingsController {
@@ -12,11 +13,12 @@ export class BookingsController {
     return this.bookingService.create(createBookingDto);
     }
 
-    @Get()
-    // @UseGuards(AuthGuard('jwt'))
-    findAll(){
-        return this.bookingService.findAll();
-    }
+   @Get()
+async findAll() {
+  const bookings = await this.bookingService.findAll();
+  return bookings.map((booking) => new BookingResponseDto(booking));
+}
+
 
     @Get(':id')
     findById(@Param('id') id:string){

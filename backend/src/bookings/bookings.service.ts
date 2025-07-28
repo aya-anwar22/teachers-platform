@@ -12,9 +12,10 @@ export class BookingsService {
     return booking.save();
   }
 
-  async findAll(): Promise<BookingDocument[]> {
-    return this.bookingModel.find().exec();
-  }
+ async findAll() {
+  return this.bookingModel.find().populate('stageId').exec();
+}
+
 
   async findById(id: string): Promise<BookingDocument> {
     const booking = await this.bookingModel.findById(id).exec();
