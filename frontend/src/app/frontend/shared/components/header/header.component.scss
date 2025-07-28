@@ -7,7 +7,17 @@
   // top: 0;
   // z-index: 1000;
   width: 100%;
-  
+  .logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-link h1 {
+  margin: 0 0 0 8px; /* مسافة بسيطة بين الصورة والنص */
+  color: inherit; /* يخلي لون النص زي الأب */
+}
+
   .container {
     display: flex;
     justify-content: space-between;
