@@ -13,7 +13,7 @@ export class BookingsController {
     }
 
     @Get()
-    @UseGuards(AuthGuard('jwt'))
+    // @UseGuards(AuthGuard('jwt'))
     findAll(){
         return this.bookingService.findAll();
     }
