@@ -9,7 +9,9 @@ import { Observable } from 'rxjs';
 })
 export class BookingService {
   private apiUrl = 'https://teachers-platform-gilt.vercel.app/booking';
+  // private apiUrl = 'http://localhost:3000/booking';
 
+  
   constructor(private http: HttpClient) { }
 
   getBooking(): Observable<Booking[]>{

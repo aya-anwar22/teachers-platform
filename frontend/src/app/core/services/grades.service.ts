@@ -9,6 +9,7 @@ import { Grade } from '../models/grade.model';
 export class GradesService {
 
   private apiUrl = 'https://teachers-platform-gilt.vercel.app/grades';
+  // private apiUrl = 'http://localhost:3000/grades';
 
   constructor(private http: HttpClient) {}
 
