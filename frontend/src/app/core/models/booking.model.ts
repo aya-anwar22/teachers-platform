@@ -3,6 +3,7 @@ export interface Booking {
   studentName: string;
   studentPhone: string;
   stageId: any;
-  stageName?: string; // ✅ Optional لأن مش دايمًا بيدخل مع البيانات
+  stageName?: string;
+  gradeName?: string;
   status?: string;
 }
