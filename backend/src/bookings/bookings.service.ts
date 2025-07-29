@@ -12,9 +12,21 @@ export class BookingsService {
     return booking.save();
   }
 
- async findAll() {
-  return this.bookingModel.find().populate('stageId').exec();
+//  async findAll() {
+//   return this.bookingModel.find().populate('stageId').exec();
+// }
+async findAll() {
+  return this.bookingModel.find()
+    .populate({
+      path: 'stageId',
+      populate: {
+        path: 'gradeId',
+        select: 'name'
+      }
+    })
+    .exec();
 }
+
 
 
   async findById(id: string): Promise<BookingDocument> {

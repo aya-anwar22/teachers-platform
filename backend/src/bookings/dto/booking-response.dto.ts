@@ -3,7 +3,8 @@ export class BookingResponseDto {
   studentName: string;
   studentPhone: string;
   stageId: string;
-  stageName: string; // ✅ ضفتيها هنا
+  stageName: string; 
+  gradeName: string;
   status: string;
 
   constructor(booking: any) {
@@ -16,6 +17,8 @@ export class BookingResponseDto {
 
     // Stage Name
     this.stageName = booking.stageId?.name ?? '';
+
+    this.gradeName = booking.stageId?.gradeId?.name ?? '';
 
     this.status = booking.status;
   }
