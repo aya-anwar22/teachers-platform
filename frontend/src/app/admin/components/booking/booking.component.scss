@@ -1,3 +1,34 @@
+/* Main layout container */
+:host {
+  display: flex;
+  min-height: 100vh;
+  direction: rtl; /* RTL direction */
+}
+
+/* Sidebar styles - will never disappear */
+app-sidebar {
+  width: 250px;
+  background-color: #2c3e50;
+  color: white;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  overflow-y: auto;
+  flex-shrink: 0; /* Prevents sidebar from shrinking */
+  z-index: 100;
+}
+
+/* Content area styles */
+.content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Booking container styles */
 .booking-container {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   max-width: 1000px;
@@ -6,6 +37,7 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   background-color: #fff;
+  overflow-x: auto;
 
   h2 {
     color: #2c3e50;
@@ -14,10 +46,16 @@
     font-size: 24px;
   }
 
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 20px;
+  }
+
   table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    min-width: 600px;
 
     thead {
       background-color: #3498db;
@@ -57,5 +95,113 @@
     color: #7f8c8d;
     font-size: 16px;
     padding: 20px;
+  }
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 1200px) {
+  app-sidebar {
+    width: 220px; /* Slightly narrower but still visible */
+  }
+}
+
+@media screen and (max-width: 992px) {
+  app-sidebar {
+    width: 200px; /* Reduced but fully visible */
+  }
+  
+  .content {
+    padding: 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  app-sidebar {
+    width: 180px; /* Further reduced but still visible */
+  }
+  
+  .booking-container {
+    padding: 15px;
+    margin: 10px;
+    
+    h2 {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    table {
+      thead {
+        display: none;
+      }
+
+      tbody {
+        tr {
+          display: block;
+          margin-bottom: 15px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          
+          &:nth-child(even) {
+            background-color: transparent;
+          }
+
+          &:hover {
+            background-color: transparent;
+          }
+        }
+
+        td {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          text-align: left;
+          padding: 8px 12px;
+          border-bottom: 1px solid #eee;
+          
+          &:before {
+            content: attr(data-label);
+            font-weight: bold;
+            margin-left: 10px;
+          }
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  :host {
+    flex-direction: row; /* Ensures sidebar stays on side */
+  }
+  
+  app-sidebar {
+    width: 60px; /* Icon-only sidebar on smallest screens */
+  }
+  
+  .content {
+    padding: 10px;
+    margin-right: 60px; /* Make space for minimized sidebar */
+  }
+  
+  .booking-container {
+    padding: 10px;
+    
+    table {
+      tbody {
+        td {
+          padding: 6px 8px;
+          font-size: 14px;
+        }
+      }
+    }
+    
+    p {
+      font-size: 14px;
+      padding: 10px;
+    }
   }
 }

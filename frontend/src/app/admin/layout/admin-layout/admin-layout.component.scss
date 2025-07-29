@@ -14,6 +14,9 @@ app-sidebar {
   position: sticky;
   top: 0;
   overflow-y: auto;
+  /* Prevent sidebar from disappearing */
+  flex-shrink: 0; /* This prevents the sidebar from shrinking */
+  z-index: 1000; /* Ensures it stays above other content */
 }
 
 .content {
@@ -21,6 +24,7 @@ app-sidebar {
   padding: 20px;
   background-color: #f5f7fa;
   min-height: 100vh;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
   
   /* Your booking container styles (RTL by default) */
   .booking-container {
@@ -87,9 +91,9 @@ app-sidebar {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
   app-sidebar {
-    width: 70px;
+    width: 200px; /* Slightly smaller but still visible */
   }
   
   .content {
@@ -97,19 +101,43 @@ app-sidebar {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
+  app-sidebar {
+    width: 180px; /* Reduced but still fully visible */
+  }
+  
+  .booking-container {
+    padding: 15px;
+    margin: 10px auto;
+    
+    table {
+      font-size: 14px;
+      
+      thead tr th,
+      tbody tr td {
+        padding: 8px 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
   :host {
-    flex-direction: column; /* Sidebar moves to top on mobile */
+    flex-direction: column-reverse; /* Sidebar moves to bottom on mobile */
   }
   
   app-sidebar {
     width: 100%;
     height: auto;
-    position: relative;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Shadow on top */
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
   }
   
   .content {
-    min-height: auto;
+    padding-bottom: 60px; /* Add space for fixed sidebar */
+    min-height: calc(100vh - 60px);
   }
 }
