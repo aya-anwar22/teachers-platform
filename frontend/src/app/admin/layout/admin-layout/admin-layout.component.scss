@@ -1,143 +1,99 @@
-/* Main layout - Sidebar on the right (RTL) */
-:host {
+.main-wrapper {
   display: flex;
   min-height: 100vh;
-  direction: rtl; /* RTL overall */
+  direction: rtl;
 }
 
 app-sidebar {
   width: 250px;
   background-color: #2c3e50;
   color: white;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Shadow on the LEFT side */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
   height: 100vh;
   position: sticky;
   top: 0;
   overflow-y: auto;
-  /* Prevent sidebar from disappearing */
-  flex-shrink: 0; /* This prevents the sidebar from shrinking */
-  z-index: 1000; /* Ensures it stays above other content */
+  flex-shrink: 0;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+
+.content-wrapper {
+  flex: 1;
+  overflow-x: hidden;
 }
 
 .content {
-  flex: 1;
   padding: 20px;
   background-color: #f5f7fa;
   min-height: 100vh;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  
-  /* Your booking container styles (RTL by default) */
-  .booking-container {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    max-width: 1000px;
-    margin: 20px auto;
-    padding: 20px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-    background-color: #fff;
-
-    h2 {
-      color: #2c3e50;
-      text-align: center;
-      margin-bottom: 25px;
-      font-size: 24px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 20px;
-
-      thead {
-        background-color: #3498db;
-        color: white;
-
-        tr th {
-          padding: 12px;
-          text-align: right; /* RTL alignment */
-          font-weight: 500;
-        }
-      }
-
-      tbody {
-        tr {
-          border-bottom: 1px solid #ecf0f1;
-          transition: background-color 0.2s;
-
-          &:hover {
-            background-color: #f8f9fa;
-          }
-
-          td {
-            padding: 12px;
-            text-align: right; /* RTL alignment */
-            color: #34495e;
-          }
-
-          &:nth-child(even) {
-            background-color: #f8f9fa;
-          }
-        }
-      }
-    }
-
-    p {
-      text-align: center;
-      color: #7f8c8d;
-      font-size: 16px;
-      padding: 20px;
-    }
-  }
 }
 
-/* Responsive adjustments */
-@media (max-width: 992px) {
+/* تعديلات للريسبونسيف */
+@media screen and (max-width: 992px) {
   app-sidebar {
-    width: 200px; /* Slightly smaller but still visible */
+    width: 70px;
+    overflow-x: hidden;
+    
+    /* إظهار الأيقونات فقط */
+    .sidebar-text {
+      display: none;
+    }
+    .sidebar-icon {
+      margin-left: 0;
+      text-align: center;
+    }
   }
   
   .content {
-    padding: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   app-sidebar {
-    width: 180px; /* Reduced but still fully visible */
-  }
-  
-  .booking-container {
-    padding: 15px;
-    margin: 10px auto;
-    
-    table {
-      font-size: 14px;
-      
-      thead tr th,
-      tbody tr td {
-        padding: 8px 10px;
-      }
-    }
+    width: 60px;
   }
 }
 
-@media (max-width: 576px) {
-  :host {
-    flex-direction: column-reverse; /* Sidebar moves to bottom on mobile */
+@media screen and (max-width: 576px) {
+  .main-wrapper {
+    flex-direction: column-reverse; /* لجعل السايدبار في الأسفل */
   }
   
   app-sidebar {
     width: 100%;
-    height: auto;
+    height: 60px;
     position: fixed;
     bottom: 0;
     top: auto;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 5px;
     z-index: 1000;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .content-wrapper {
+    padding-bottom: 70px; /* مساحة للسايدبار المثبت */
+    width: 100%;
   }
   
   .content {
-    padding-bottom: 60px; /* Add space for fixed sidebar */
-    min-height: calc(100vh - 60px);
+    padding-bottom: 30px; /* مساحة إضافية */
+  }
+}
+
+/* تحسينات إضافية للوضع الأفقي على الهاتف */
+@media screen and (max-height: 450px) and (orientation: landscape) {
+  app-sidebar {
+    height: 50px;
+  }
+  
+  .content-wrapper {
+    padding-bottom: 60px;
   }
 }
