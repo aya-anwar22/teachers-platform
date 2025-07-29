@@ -1,91 +1,33 @@
-<div class="sidebar">
+<div class="sidebar" [class.collapsed]="isCollapsed">
   <div class="sidebar-header">
-    <h3>لوحة التحكم</h3>
-    <button class="toggle-btn">
-      <i class="fas fa-chevron-left"></i>
+    <h3 *ngIf="!isCollapsed">لوحة التحكم</h3>
+    <button class="toggle-btn" (click)="toggleSidebar()">
+      <i class="fas" [class.fa-chevron-right]="isCollapsed" [class.fa-chevron-left]="!isCollapsed"></i>
     </button>
   </div>
   
   <div class="sidebar-menu">
     <ul>
-      <li>
-        <a routerLink="/dashboard" routerLinkActive="active">
-          <i class="fas fa-home"></i>
-          <span class="menu-text">الرئيسية</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/bookings" routerLinkActive="active">
-          <i class="fas fa-calendar-check"></i>
-          <span class="menu-text">الحجوزات</span>
-        </a>
-      </li>
-
-      <li>
-        <a routerLink="/bookings" routerLinkActive="active">
-          <i class="fas fa-calendar-check"></i>
-          <span class="menu-text">المراحل الدراسيه</span>
-        </a>
-      </li>
-
-
-      <li>
-        <a routerLink="/bookings" routerLinkActive="active">
-          <i class="fas fa-calendar-check"></i>
-          <span class="menu-text">الصفوف الدراسيه</span>
-        </a>
-      </li>
-
-
-      <li>
-        <a routerLink="/students" routerLinkActive="active">
-          <i class="fas fa-users"></i>
-          <span class="menu-text">الطلاب</span>
-        </a>
-      </li>
-      <li>
-
-      </li>
-      <li>
-        <a routerLink="/lessons" routerLinkActive="active">
-          <i class="fas fa-book"></i>
-          <span class="menu-text">الدروس</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/questions" routerLinkActive="active">
-          <i class="fas fa-question-circle"></i>
-          <span class="menu-text">الأسئلة</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/discussions" routerLinkActive="active">
-          <i class="fas fa-comments"></i>
-          <span class="menu-text">النقاشات</span>
-        </a>
-      </li>
-      <li>
-        <a routerLink="/settings" routerLinkActive="active">
-          <i class="fas fa-cog"></i>
-          <span class="menu-text">الإعدادات</span>
-        </a>
-      </li>
-      <li class="logout-item">
-        <a href="#">
-          <i class="fas fa-sign-out-alt"></i>
-          <span class="menu-text">تسجيل الخروج</span>
+      <li *ngFor="let item of menuItems">
+        <a [routerLink]="item.link" routerLinkActive="active">
+          <i [class]="'fas ' + item.icon"></i>
+          <span class="menu-text" *ngIf="!isCollapsed">{{item.text}}</span>
         </a>
       </li>
     </ul>
   </div>
   
-  <div class="sidebar-footer">
+  <div class="sidebar-footer" *ngIf="!isCollapsed">
     <div class="user-profile">
-      <img src="assets/images/user-avatar.png" alt="User Avatar">
+      <img [src]="userImage" alt="صورة المستخدم">
       <div class="user-info">
-        <span class="user-name">اسم المستخدم</span>
-        <span class="user-role">مدير النظام</span>
+        <span class="user-name">{{userName}}</span>
+        <span class="user-role">{{userRole}}</span>
       </div>
     </div>
   </div>
 </div>
+
+<button class="mobile-menu-btn" *ngIf="isMobileView" (click)="toggleSidebar()">
+  <i class="fas fa-bars"></i>
+</button>

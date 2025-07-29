@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 import { RouterOutlet } from '@angular/router';
 
@@ -11,5 +11,7 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './admin-layout.component.scss'
 })
 export class AdminLayoutComponent {
+
+    @ViewChild('sidebar') sidebar?: SidebarComponent;
 
 }
