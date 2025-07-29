@@ -1,64 +1,58 @@
-/* الأساسيات */
-:host {
-  display: block;
-  direction: rtl;
-}
-
-/* تحسينات الخطوط */
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 
-/* تحسينات السايدبار */
+:host {
+  display: block;
+  height: 100vh;
+  direction: rtl;
+}
+
 .sidebar {
   font-family: 'Tajawal', sans-serif;
+  height: 100%;
   width: 280px;
-  background: linear-gradient(180deg, #1e2a38 0%, #0f1721 100%);
+  background: linear-gradient(180deg, #2c3e50 0%, #1a2530 100%);
   color: #fff;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  right: 0;
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
-  z-index: 1000;
-  box-shadow: 2px 0 15px rgba(0,0,0,0.2);
-  overflow-y: auto;
+  position: relative;
+  overflow: hidden;
 
-  /* تحسينات الرأس */
   &-header {
-    padding: 20px;
+    padding: 20px 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(255,255,255,0.15);
-    background: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
     h3 {
       margin: 0;
       font-size: 1.3rem;
       font-weight: 700;
       color: #fff;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .toggle-btn {
-      background: rgba(255,255,255,0.1);
+      background: transparent;
       border: none;
-      color: white;
-      font-size: 1.1rem;
+      color: #fff;
+      font-size: 1.2rem;
       cursor: pointer;
-      padding: 8px;
+      transition: all 0.3s ease;
+      padding: 5px 10px;
       border-radius: 4px;
-      transition: all 0.2s;
 
       &:hover {
-        background: rgba(255,255,255,0.2);
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateX(-3px);
       }
     }
   }
 
-  /* تحسينات القائمة */
   &-menu {
     flex: 1;
     overflow-y: auto;
@@ -70,61 +64,73 @@
       margin: 0;
 
       li {
-        margin-bottom: 3px;
+        margin-bottom: 5px;
+        position: relative;
 
         a {
           display: flex;
           align-items: center;
-          padding: 14px 20px;
-          color: rgba(255,255,255,0.9);
+          padding: 12px 20px;
+          color: #e0e0e0;
           text-decoration: none;
-          transition: all 0.2s ease;
-          font-size: 0.95rem;
-          font-weight: 500;
+          transition: all 0.3s ease;
+          border-right: 3px solid transparent;
+          position: relative;
+          overflow: hidden;
 
           i {
-            margin-left: 12px;
-            font-size: 1.2rem;
-            width: 24px;
+            margin-left: 10px;
+            font-size: 1.1rem;
+            width: 20px;
             text-align: center;
-            color: rgba(255,255,255,0.8);
           }
 
           .menu-text {
+            flex: 1;
             font-size: 0.95rem;
-            white-space: nowrap;
           }
 
           &:hover {
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.05);
             color: #fff;
-            
-            i {
-              color: #fff;
-            }
+            border-right-color: #3498db;
           }
 
-          &.active {
-            background: rgba(52, 152, 219, 0.2);
-            color: #fff;
-            border-right: 3px solid #3498db;
-            
-            i {
-              color: #3498db;
-            }
+          &::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, rgba(52, 152, 219, 0.2) 0%, rgba(52, 152, 219, 0) 100%);
+            transition: width 0.3s ease;
+          }
+
+          &:hover::before {
+            width: 100%;
           }
         }
 
+        &.active a {
+          background: rgba(255, 255, 255, 0.1);
+          color: #fff;
+          border-right-color: #3498db;
+          font-weight: 500;
+        }
+
         &.logout-item {
-          margin-top: 15px;
-          border-top: 1px solid rgba(255,255,255,0.15);
+          margin-top: 20px;
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
           padding-top: 10px;
 
           a {
             color: #e74c3c;
 
             &:hover {
-              background: rgba(231, 76, 60, 0.15);
+              color: #fff;
+              background: rgba(231, 76, 60, 0.1);
+              border-right-color: #e74c3c;
             }
           }
         }
@@ -132,23 +138,22 @@
     }
   }
 
-  /* تذييل السايدبار */
   &-footer {
     padding: 15px;
-    border-top: 1px solid rgba(255,255,255,0.15);
-    background: rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 
     .user-profile {
       display: flex;
       align-items: center;
 
       img {
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         object-fit: cover;
-        border: 2px solid rgba(255,255,255,0.25);
-        margin-left: 12px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        margin-left: 10px;
       }
 
       .user-info {
@@ -156,117 +161,72 @@
         flex-direction: column;
 
         .user-name {
-          font-size: 0.95rem;
-          font-weight: 600;
-          margin-bottom: 2px;
+          font-weight: 500;
+          font-size: 0.9rem;
         }
 
         .user-role {
-          font-size: 0.85rem;
-          color: rgba(255,255,255,0.7);
+          font-size: 0.8rem;
+          color: rgba(255, 255, 255, 0.7);
         }
       }
     }
   }
 
-  /* وضع التصغير */
-  &.collapsed {
-    width: 80px;
+  /* Scrollbar styling */
+  &-menu::-webkit-scrollbar {
+    width: 5px;
+  }
 
-    .menu-text, .user-info, h3 {
+  &-menu::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &-menu::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+  }
+
+  &-menu::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Collapsed state */
+.sidebar.collapsed {
+  width: 70px;
+
+  .sidebar-header {
+    justify-content: center;
+
+    h3 {
+      display: none;
+    }
+  }
+
+  .menu-text {
+    display: none;
+  }
+
+  .sidebar-menu ul li a {
+    justify-content: center;
+    padding: 12px 0;
+
+    i {
+      margin-left: 0;
+      font-size: 1.3rem;
+    }
+  }
+
+  .user-profile {
+    justify-content: center;
+
+    .user-info {
       display: none;
     }
 
-    .sidebar-menu ul li a {
-      justify-content: center;
-      padding: 14px 0;
-
-      i {
-        margin-left: 0;
-        font-size: 1.3rem;
-      }
+    img {
+      margin-left: 0;
     }
-
-    .sidebar-footer {
-      padding: 15px 0;
-      
-      .user-profile {
-        justify-content: center;
-        
-        img {
-          margin-left: 0;
-          width: 40px;
-          height: 40px;
-        }
-      }
-    }
-  }
-}
-
-/* زر القائمة للجوال */
-.mobile-menu-btn {
-  display: none;
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: #3498db;
-  color: white;
-  border: none;
-  font-size: 1.3rem;
-  z-index: 1001;
-  box-shadow: 0 3px 15px rgba(0,0,0,0.3);
-  cursor: pointer;
-  transition: all 0.3s;
-
-  &:hover {
-    background: #2980b9;
-    transform: scale(1.05);
-  }
-}
-
-/* تحسينات للشاشات الصغيرة */
-@media (max-width: 1200px) {
-  .content-wrapper {
-    margin-right: 80px;
-  }
-}
-
-@media (max-width: 992px) {
-  .sidebar {
-    transform: translateX(100%);
-    
-    &.collapsed {
-      transform: translateX(0);
-      width: 80px;
-    }
-    
-    &:not(.collapsed) {
-      transform: translateX(0);
-      width: 280px;
-    }
-  }
-
-  .mobile-menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-@media (max-width: 576px) {
-  .sidebar:not(.collapsed) {
-    width: 85%;
-    max-width: 300px;
-  }
-  
-  .mobile-menu-btn {
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    font-size: 1.2rem;
   }
 }
