@@ -15,8 +15,9 @@ app-sidebar {
   position: sticky;
   top: 0;
   overflow-y: auto;
-  flex-shrink: 0; /* Prevents sidebar from shrinking */
+  flex-shrink: 0;
   z-index: 100;
+  transition: width 0.3s ease;
 }
 
 /* Content area styles */
@@ -26,6 +27,7 @@ app-sidebar {
   background-color: #f5f7fa;
   min-height: 100vh;
   overflow-x: hidden;
+  transition: margin-right 0.3s ease;
 }
 
 /* Booking container styles */
@@ -101,53 +103,74 @@ app-sidebar {
 /* Responsive adjustments */
 @media screen and (max-width: 1200px) {
   app-sidebar {
-    width: 220px; /* Slightly narrower but still visible */
+    width: 220px;
+  }
+  
+  .booking-container {
+    max-width: 900px;
   }
 }
 
 @media screen and (max-width: 992px) {
   app-sidebar {
-    width: 200px; /* Reduced but fully visible */
+    width: 80px; /* Collapsed sidebar with icons only */
+    
+    /* Hide text labels when collapsed */
+    .sidebar-text {
+      display: none;
+    }
+    
+    /* Center icons */
+    .sidebar-icon {
+      margin-left: 0;
+      text-align: center;
+    }
   }
   
   .content {
     padding: 15px;
+    margin-right: 80px; /* Make space for collapsed sidebar */
+  }
+  
+  .booking-container {
+    max-width: 100%;
+    margin: 15px 0;
   }
 }
 
 @media screen and (max-width: 768px) {
   app-sidebar {
-    width: 180px; /* Further reduced but still visible */
+    width: 60px;
+  }
+  
+  .content {
+    margin-right: 60px;
+    padding: 12px;
   }
   
   .booking-container {
     padding: 15px;
-    margin: 10px;
     
     h2 {
       font-size: 20px;
-      margin-bottom: 15px;
     }
 
+    /* Stacked table for mobile */
     table {
+      min-width: 100%;
+      
       thead {
         display: none;
       }
 
-      tbody {
-        tr {
-          display: block;
-          margin-bottom: 15px;
-          border: 1px solid #ddd;
-          border-radius: 5px;
-          
-          &:nth-child(even) {
-            background-color: transparent;
-          }
-
-          &:hover {
-            background-color: transparent;
-          }
+      tbody tr {
+        display: block;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        
+        &:nth-child(even) {
+          background-color: transparent;
         }
 
         td {
@@ -174,34 +197,104 @@ app-sidebar {
 }
 
 @media screen and (max-width: 576px) {
+  /* Mobile-first approach for smallest screens */
   :host {
-    flex-direction: row; /* Ensures sidebar stays on side */
+    flex-direction: column;
   }
   
   app-sidebar {
-    width: 60px; /* Icon-only sidebar on smallest screens */
+    width: 100%;
+    height: auto;
+    position: fixed;
+    bottom: 0;
+    top: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    height: 60px;
+    
+    /* Show icons in row */
+    .sidebar-menu {
+      display: flex;
+      flex: 1;
+      padding: 0;
+      
+      ul {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        
+        li {
+          margin: 0;
+          
+          a {
+            flex-direction: column;
+            padding: 5px 10px;
+            
+            i {
+              margin: 0 0 3px 0;
+              font-size: 1.2rem;
+            }
+            
+            .sidebar-text {
+              display: block;
+              font-size: 0.7rem;
+            }
+          }
+        }
+      }
+    }
   }
   
   .content {
-    padding: 10px;
-    margin-right: 60px; /* Make space for minimized sidebar */
+    margin-right: 0;
+    padding-bottom: 80px; /* Space for fixed bottom sidebar */
+    padding-top: 15px;
+    width: 100%;
   }
   
   .booking-container {
     padding: 10px;
     
-    table {
-      tbody {
-        td {
-          padding: 6px 8px;
-          font-size: 14px;
-        }
-      }
+    h2 {
+      font-size: 18px;
+    }
+    
+    table tbody td {
+      font-size: 14px;
+      padding: 6px 8px;
     }
     
     p {
       font-size: 14px;
       padding: 10px;
     }
+  }
+}
+
+/* Landscape mode adjustments */
+@media screen and (max-width: 992px) and (orientation: landscape) {
+  app-sidebar {
+    height: 50px;
+    
+    .sidebar-menu ul li a {
+      padding: 5px 8px;
+      
+      i {
+        font-size: 1rem;
+        margin-bottom: 2px;
+      }
+      
+      .sidebar-text {
+        font-size: 0.6rem;
+      }
+    }
+  }
+  
+  .content {
+    padding-bottom: 60px;
   }
 }
